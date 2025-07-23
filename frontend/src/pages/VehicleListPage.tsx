@@ -17,28 +17,28 @@ const VehicleListPage : React.FC = () => {
 
     return (
         <>
-            <div className="p-4 bg-[#EFF6FE] rounded-lg">
-                <h1 className="text-3xl font-bold mb-6 text-gray-800">Fleet Overview</h1>
+            <div className="p-4 bg-transparent rounded-lg">
+                <h1 className="text-2xl font-semibold mb-6 text-primary-dark">Overview</h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center shadow-sm">
-                        <h2 className="text-lg font-semibold text-blue-700">Total Vehicles</h2>
-                        <p className="text-4xl font-extrabold text-blue-900 mt-2">{vehicles.length}</p>
+                    <div className="bg-secondary-light rounded-lg p-6 text-center shadow-sm">
+                        <h2 className="text-lg text-white">Total Vehicles</h2>
+                        <p className="text-4xl font-semibold text-white mt-2">{vehicles.length}</p>
                     </div>
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center shadow-sm">
-                        <h2 className="text-lg font-semibold text-green-700">Active</h2>
-                        <p className="text-4xl font-extrabold text-green-900 mt-2">{activeCount}</p>
+                    <div className="bg-green-400 rounded-lg p-6 text-center shadow-sm">
+                        <h2 className="text-lg  text-white">Active</h2>
+                        <p className="text-4xl font-semibold text-white mt-2">{activeCount}</p>
                     </div>
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center shadow-sm">
-                        <h2 className="text-lg font-semibold text-red-700">Inactive</h2>
-                        <p className="text-4xl font-extrabold text-red-900 mt-2">{inactiveCount}</p>
+                    <div className="bg-secondary-red rounded-lg p-6 text-center shadow-sm">
+                        <h2 className="text-lg  text-white">Inactive</h2>
+                        <p className="text-4xl font-semibold text-white mt-2">{inactiveCount}</p>
                     </div>
                 </div>
 
-                <h2 className="text-2xl font-bold mb-4 text-gray-800">Vehicle List</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-primary-dark">Vehicle List</h2>
                 <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-                    <table className="w-full text-sm text-left text-gray-500">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                    <table className="w-full text-sm text-left ">
+                        <thead className="text-xs text-gray-700 uppercase bg-white">
                         <tr>
                             <th scope="col" className="py-3 px-6">ID</th>
                             <th scope="col" className="py-3 px-6">Name</th>

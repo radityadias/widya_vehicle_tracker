@@ -8,10 +8,12 @@ interface VehicleCardProps {
 
 const vehicleTable : React.FC<VehicleCardProps> = ({vehicle}) => {
     const statusColor = vehicle.status === 'ACTIVE' ? 'text-green-600' : 'text-red-600';
+    const formatDate = (isoString: string) => new Date(isoString).toLocaleString(); // <-- This is your formatting function
+
 
     return (
         <>
-            <tr className="border-b hover:bg-gray-50">
+            <tr className="odd:bg-white even:bg-gray-100 odd:hover:bg-gray-50 even:hover:bg-gray-200">
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {vehicle.id}
                 </td>
@@ -33,7 +35,7 @@ const vehicleTable : React.FC<VehicleCardProps> = ({vehicle}) => {
                     {vehicle.speed.toFixed(1)} km/h
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {vehicle.updated_at}
+                    {formatDate(vehicle.updated_at)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link to={`/vehicles/${vehicle.id}`} className="text-blue-600 hover:text-blue-900">
