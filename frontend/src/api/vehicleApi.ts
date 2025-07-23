@@ -1,6 +1,6 @@
 import type {Vehicle} from "../types";
 
-const API_BASE_URL = "https://localhost:3000";
+const API_BASE_URL = "http://localhost:3000";
 
 export const fetchVehicles = async () : Promise<Vehicle[]> => {
     const response = await fetch(`${API_BASE_URL}/vehicles`);
