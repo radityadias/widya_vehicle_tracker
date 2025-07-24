@@ -2,8 +2,16 @@ import type {Vehicle} from "../types";
 
 const API_BASE_URL = "http://localhost:3000";
 
-export const fetchVehicles = async () : Promise<Vehicle[]> => {
-    const response = await fetch(`${API_BASE_URL}/vehicles`);
+export const fetchVehicles = async (token?: string) : Promise<Vehicle[]> => {
+    console.log("Token: ", token);
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    };
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_BASE_URL}/vehicles`, {headers});
 
     if (!response.ok) {
         throw new Error(`HTTP response status ${response.status}`);
@@ -13,8 +21,16 @@ export const fetchVehicles = async () : Promise<Vehicle[]> => {
     return data;
 };
 
-export const fetchVehiclesById = async (id: number) : Promise<Vehicle> => {
-    const response = await fetch(`${API_BASE_URL}/vehicles/${id}`);
+export const fetchVehiclesById = async (id: number, token?: string) : Promise<Vehicle> => {
+    console.log("Token: ", token);
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    };
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_BASE_URL}/vehicles/${id}`, {headers});
 
     if (!response.ok) {
        if (response.status === 404) {

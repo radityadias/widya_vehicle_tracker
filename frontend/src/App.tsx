@@ -1,25 +1,25 @@
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Navbar from "./components/Navbar.tsx";
-import Sidebar from "./components/Sidebar";
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import LoginPage from "./pages/Auth/LoginPage.tsx";
+import AppLayout from "./layout/AppLayout.tsx";
 import VehicleDashboardPage from "./pages/VehicleDashboardPage.tsx";
 import VehicleDetailPage from "./pages/VehicleDetailPage.tsx";
-
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 function App() {
-
   return (
    <Router>
-        <Navbar />
-        <Sidebar />
+        <Routes>
+            <Route path="/auth/login" element={<LoginPage/>}/>
 
-       <main className="p-4 sm:ml-48 bg-[#f6f9fe] min-h-screen">
-           <div className="rounded-lg mt-14">
-               <Routes>
-                   <Route path="/" element={<VehicleDashboardPage />} />
-                   <Route path="/vehicles/:id" element={<VehicleDetailPage />} />
-               </Routes>
-           </div>
-       </main>
+            <Route element={<ProtectedRoute/>}>
+                <Route element={<AppLayout/>}>
+                    <Route path="/" element={<VehicleDashboardPage/>}/>
+                    <Route path="/vehicles/:id" element={<VehicleDetailPage/>}/>
+                </Route>
+            </Route>
+
+            <Route path="*" element={<Navigate to="/auth/login" replace />}/>
+        </Routes>
    </Router>
   )
 }

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type {Vehicle} from "../types";
-import { fetchVehicles, fetchVehiclesById } from "../api/vehicleApi";
+import { fetchVehicles as apiFetchVehicles, fetchVehiclesById as apiFetchVehicleById } from "../api/vehicleApi";
+import {useAuthStore} from "./useAuthStore.ts";
 
 interface VehicleState {
     vehicles: Vehicle[];
@@ -21,7 +22,12 @@ export const useVehicleStore = create<VehicleState>((set) => ({
     fetchVehicles: async () => {
         set({loading: true, error: null});
         try{
-            const data = await fetchVehicles();
+            const token = useAuthStore.getState().token;
+            if (!token) {
+                throw new Error('Harap login terlebih dahulu.');
+            }
+
+            const data = await apiFetchVehicles(token);
             set({vehicles: data, loading: false});
         }catch (err) {
             console.error("Gagal memuat data kendaraan: ", err);
@@ -32,7 +38,12 @@ export const useVehicleStore = create<VehicleState>((set) => ({
     fetchVehiclesById: async (id: number) => {
         set({ loading: true, error: null });
         try{
-            const data = await fetchVehiclesById(id);
+            const token = useAuthStore.getState().token;
+            if (!token) {
+                throw new Error('Harap login terlebih dahulu.');
+            }
+
+            const data = await apiFetchVehicleById(id, token);
             set({selectedVehicle: data, loading: false});
         }
         catch (err){

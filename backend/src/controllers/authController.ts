@@ -30,7 +30,7 @@ export const login = async (req: Request, res: Response) => {
 
         const token = jwt.sign({userId: user.id, userEmail: user.email}, JWT_SECRET, { expiresIn: "1h" });
 
-        res.status(200).json({message: "Login sukses.", token, userId: user.id});
+        res.status(200).json({message: "Login sukses.", token, userId: user.id,  userEmail: user.email});
     }
     catch (err) {
         console.error("Error saat mencoba login ", err);

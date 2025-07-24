@@ -33,7 +33,7 @@ async function main() {
     const userData = [
         {
             username: "admin123",
-            password: "indoensia1",
+            password: "indonesia1",
             email: "indonesia1@gmail.com"
         }
     ]

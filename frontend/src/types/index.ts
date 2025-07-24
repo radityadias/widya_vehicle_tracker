@@ -9,3 +9,15 @@ export interface Vehicle{
     speed: number;
     updated_at: string;
 }
+
+export interface UserAuth {
+    id: number;
+    email: string;
+}
+
+export interface LoginResponse {
+    message: string;
+    token: string;
+    userId: number;
+    userEmail: string;
+}
