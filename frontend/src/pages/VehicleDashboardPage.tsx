@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useVehicleStore } from "../store/useVehicleStore.ts";
 import VehicleTable from "../components/VehicleTable";
 
-const VehicleListPage : React.FC = () => {
+const VehicleDashboardPage : React.FC = () => {
     const {vehicles, loading, error, fetchVehicles} = useVehicleStore();
 
     useEffect(() => {
@@ -65,4 +65,4 @@ const VehicleListPage : React.FC = () => {
     )
 };
 
-export default VehicleListPage;
+export default VehicleDashboardPage;
