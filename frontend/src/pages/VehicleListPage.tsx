@@ -18,7 +18,10 @@ const VehicleListPage : React.FC = () => {
     return (
         <>
             <div className="p-4 bg-transparent rounded-lg">
-                <h1 className="text-2xl font-semibold mb-6 text-primary-dark">Overview</h1>
+                <div className="flex justify-start sm:justify-between">
+                    <h1 className="text-2xl font-semibold mb-6 text-primary-dark">Overview</h1>
+                    <h1 className="text-3xl font-semibold mb-6 text-gray-700 hidden sm:inline">Dashboard</h1>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div className="bg-secondary-light rounded-lg p-6 text-center shadow-sm">

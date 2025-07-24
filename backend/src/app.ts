@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import vehicleRoute from "./routes/vehicleRoute";
 import cors = require("cors");
 import express = require("express");

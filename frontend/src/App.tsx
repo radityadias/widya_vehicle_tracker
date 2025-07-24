@@ -12,7 +12,7 @@ function App() {
         <Navbar />
         <Sidebar />
 
-       <main className="p-4 sm:ml-48 bg-[#f6f9fe] h-screen">
+       <main className="p-4 sm:ml-48 bg-[#f6f9fe] min-h-screen">
            <div className="rounded-lg mt-14">
                <Routes>
                    <Route path="/" element={<VehicleListPage />} />
