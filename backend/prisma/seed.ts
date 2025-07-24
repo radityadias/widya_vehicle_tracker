@@ -1,13 +1,15 @@
 import 'dotenv/config';
 import { PrismaClient } from '../generated/prisma'
-
+import bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
 
 async function main() {
     console.log('Seeding database...');
-    const vehicle1 = await prisma.vehicle.upsert({
-        where: { id: 1 },
-        update: {
+    const saltRounds = 10
+
+    const vehicleData = [
+        {
+            id: 1,
             name: 'Toyota Almaz',
             status: 'ACTIVE',
             fuel_level: 75.5,
@@ -16,29 +18,8 @@ async function main() {
             longtitude: 120.3695,
             speed: 73.5,
         },
-        create: {
-            name: 'Toyota Almaz',
-            status: 'ACTIVE',
-            fuel_level: 75.5,
-            odometer: 123456.7,
-            latitude: -7.7956,
-            longtitude: 110.3695,
-            speed: 66.5,
-        },
-    });
-
-    const vehicle2 = await prisma.vehicle.upsert({
-        where: { id: 2 },
-        update: {
-            name: 'Toyota Yaris',
-            status: 'INACTIVE',
-            fuel_level: 63.0,
-            odometer: 5345.4,
-            latitude: -7.8013,
-            longtitude: 50.1532,
-            speed: 90.0,
-        },
-        create: {
+        {
+            id: 2,
             name: 'Toyota Yaris',
             status: 'INACTIVE',
             fuel_level: 43.0,
@@ -46,11 +27,53 @@ async function main() {
             latitude: -7.8013,
             longtitude: 110.3644,
             speed: 80.0,
-        },
-    });
+        }
+    ]
 
-    console.log('Seeding complete.');
-    console.log({ vehicle1, vehicle2 });
+    const userData = [
+        {
+            username: "admin123",
+            password: "indoensia1",
+            email: "indonesia1@gmail.com"
+        }
+    ]
+
+    for (const vehicle of vehicleData) {
+        await prisma.vehicle.upsert({
+            where: { id: 1 },
+            update: {},
+            create: {
+                name: vehicle.name,
+                status: vehicle.status,
+                fuel_level: vehicle.fuel_level,
+                odometer: vehicle.odometer,
+                latitude: vehicle.latitude,
+                longtitude: vehicle.longtitude,
+                speed: vehicle.speed,
+            },
+        });
+
+        console.log(vehicle);
+    }
+
+    for (const user of userData) {
+        const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+
+        await prisma.user.upsert({
+            where: { id: 1 },
+            update: {
+                password: hashedPassword,
+            },
+            create: {
+                username: user.username,
+                password: hashedPassword,
+                email: user.email,
+            }
+        })
+        console.log(user);
+    }
+
+    console.log('Seeding Complete');
 }
 
 main()
