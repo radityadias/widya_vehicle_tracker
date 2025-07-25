@@ -15,7 +15,7 @@ model Vehicle {
   fuel_level Float
   odometer   Float
   latitude   Float
-  longtitude Float
+  longitude  Float
   speed      Float
   updated_at DateTime @default(now())
 }

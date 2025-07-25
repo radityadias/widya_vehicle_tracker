@@ -6,6 +6,7 @@ const VehicleDashboardPage : React.FC = () => {
     const [search, setSearch] = useState("");
     const {vehicles, loading, error, fetchVehicles} = useVehicleStore();
 
+    // Client-Side Filter
     const filteredVehicles = React.useMemo(() => {
         if (!search) {
             return vehicles;
@@ -24,8 +25,9 @@ const VehicleDashboardPage : React.FC = () => {
     const activeCount = filteredVehicles.filter(v => v.status === "ACTIVE").length;
     const inactiveCount = filteredVehicles.filter(v => v.status === "INACTIVE").length;
 
+    // Reset Seach Input
     const handleResetSearch = () => {
-        setSearch(''); // Setting search to empty string will automatically reset filteredVehicles
+        setSearch('');
     };
 
     const showLoading = loading;
@@ -39,13 +41,13 @@ const VehicleDashboardPage : React.FC = () => {
                 <div className="flex justify-start sm:justify-between items-center mb-6">
                     <h1 className="text-2xl font-semibold text-primary-dark">Overview</h1>
                 </div>
-
+                {/* Card */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-secondary-dark rounded-lg p-6 text-center shadow-sm">
+                    <div className="bg-primary-light rounded-lg p-6 text-center shadow-sm">
                         <h2 className="text-lg text-white">Total Vehicles</h2>
                         <p className="text-4xl font-semibold text-white mt-2">{filteredVehicles.length}</p>
                     </div>
-                    <div className="bg-green-500 rounded-lg p-6 text-center shadow-sm">
+                    <div className="bg-green-400 rounded-lg p-6 text-center shadow-sm">
                         <h2 className="text-lg text-white">Active</h2>
                         <p className="text-4xl font-semibold text-white mt-2">{activeCount}</p>
                     </div>
@@ -54,8 +56,8 @@ const VehicleDashboardPage : React.FC = () => {
                         <p className="text-4xl font-semibold text-white mt-2">{inactiveCount}</p>
                     </div>
                 </div>
-
                 <h2 className="text-2xl font-semibold mb-4 text-primary-dark">Vehicle List</h2>
+                {/* Search */}
                 <div className="mb-5">
                     <form className="max-w-md">
                         <label htmlFor="default-search"
@@ -87,7 +89,7 @@ const VehicleDashboardPage : React.FC = () => {
                         </div>
                     </form>
                 </div>
-                {/* --- Adjusted Table/Message Section --- */}
+                {/* Tabel Kendaraan */}
                 <div className="overflow-x-auto relative shadow-md sm:rounded-lg bg-white p-4">
                     {showLoading && (
                         <p className="text-center text-gray-600 py-10">Sedang Memuat...</p>

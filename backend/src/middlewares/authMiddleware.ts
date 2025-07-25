@@ -8,15 +8,18 @@ export const authToken = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;
 
+    // Jika token tidak ada
     if (!token) {
         return res.status(401).json({ message: 'Authentication token required.' });
     }
 
+    // Jika JWT Secret tidak ada (di .env)
     if (!JWT_SECRET) {
         console.error('JWT_SECRET is not defined for authentication middleware!');
         return res.status(500).json({ message: 'Server configuration error.' });
     }
 
+    // Semua berhasil
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.status(403).json({ message: "Invalid or Expired Token" });

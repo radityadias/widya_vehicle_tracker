@@ -1,18 +1,32 @@
-import {Link} from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore.ts";
 
 const Sidebar = () => {
+    const { logout, isLoggedIn } = useAuthStore();
+    const navigate = useNavigate();
+
+    // Logout
+    const handleLogout = () => {
+        logout();
+        navigate("/auth/login");
+    };
+
+    if (!isLoggedIn) {
+        return null;
+    }
+
     return (
         <aside id="logo-sidebar"
                className="fixed top-0 left-0 z-40 w-48 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0"
                aria-label="Sidebar">
-            <div className="h-full px-3 pb-4 overflow-y-auto bg-white ">
-                <ul className="space-y-2 font-medium">
-                    <Link to="/">
+            <div className="h-full px-3 pb-4 overflow-y-auto bg-white flex flex-col">
+                <ul className="space-y-2 font-medium flex-grow">
+                    {/* Sidebar Content */}
+                    <Link to="/" className="flex">
                         <li>
-                            <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-primary-dark group">
+                            <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-primary-dark group"> {/* Removed dark:text-white dark:group-hover:text-white */}
                                 <svg
-                                    className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-white"
+                                    className="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-white" // Removed dark:text-gray-400 dark:group-hover:text-white
                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                     viewBox="0 0 22 21">
                                     <path
@@ -25,9 +39,21 @@ const Sidebar = () => {
                         </li>
                     </Link>
                 </ul>
+
+
+                <ul className="mt-auto space-y-2 font-medium">
+                    <li>
+                        <button
+                            onClick={handleLogout}
+                            className="flex items-center w-full p-2 text-gray-900 rounded-lg hover:bg-red-600 group hover:text-white transition duration-75" // Adjusted styling for logout button
+                        >
+                            <span className="ms-3 text-gray-500 group-hover:text-white">Logout</span>
+                        </button>
+                    </li>
+                </ul>
             </div>
         </aside>
-    )
+    );
 };
 
 export default Sidebar;

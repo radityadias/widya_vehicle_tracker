@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/auth", authRoutes);
-app.use("/vehicles",authToken,  vehicleRoute); // Rute default
+app.use("/auth", authRoutes); // Rute default autentikasi
+app.use("/vehicles", authToken,  vehicleRoute); // Rute default kendaraan menggunakan middleware
 
 export default app;
