@@ -6,8 +6,9 @@ const prisma = new PrismaClient();
 // Fungsi untuk mendapatkan semua data kendaraan
 export const getAllVehicles = async (req: Request, res: Response) => {
     try {
-        const vehicle = await prisma.vehicle.findMany();
-        res.json(vehicle);
+        const vehicles = await prisma.vehicle.findMany();
+
+        res.json(vehicles);
     }
     catch(err) {
         console.error(err);
@@ -32,6 +33,6 @@ export const getVehicleById = async (req: Request, res: Response) => {
     }
     catch(err) {
         console.error(`Terjadi kesalahan saat mencari id ${id} `, err);
-        res.status(500).json({message: "Ada yang Salah!"});
+        res.status(500).json({message: "Ada yang salah saat mencari kendaraan!"});
     }
 }
